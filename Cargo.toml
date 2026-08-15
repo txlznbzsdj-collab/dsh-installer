@@ -1,0 +1,31 @@
+[package]
+name = "dsh-installer"
+version = "0.1.0"
+edition = "2024"
+description = "DSH (DeepSeek Harness) 一键安装助手 — 图形化安装包程序"
+license = "MIT"
+
+[dependencies]
+eframe = "0.31"
+rfd = "0.15"
+dirs = "6"
+image = { version = "0.25", default-features = false, features = ["png"] }
+base64 = "0.22"
+
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.58", features = [
+    "Win32_System_Com",
+    "Win32_UI_Shell",
+] }
+winit = "0.30"
+wry = "0.55"
+
+[profile.release]
+opt-level = 2
+lto = "thin"
+strip = true
+codegen-units = 16
+panic = "abort"
+
+[build-dependencies]
+winresource = "0.1"
